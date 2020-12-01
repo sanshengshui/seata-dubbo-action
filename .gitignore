@@ -1,0 +1,11 @@
+# Project exclude paths
+# Created by .ignore support plugin (hsz.mobi)
+### Example userEntity template template
+### Example userEntity template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+target
