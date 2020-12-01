@@ -1,0 +1,71 @@
+# dubbo配置项，对应DubboConfigurationProperties 配置类
+dubbo:
+  application:
+    name: ${spring.application.name} #应用名
+  registry:
+    address: zookeeper://127.0.0.1:2181 #注册中心地址
+    timeout: 1000 # 指定注册到zk上超时时间,ms
+  protocol:
+    port: 20881 # 协议端口。使用 -1表示随机端口
+    name: dubbo # 使用 `dubbo://` 协议。更多协议，可见 http://dubbo.apache.org/zh-cn/docs/user/references/protocol/introduction.html 文档
+  scan:
+    base-packages: cn.mushuwei.storage # 指定实现服务的包
+server:
+  port: 8081
+
+# MyBatis 自定义的mapper配置
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  config-location: classpath:mybatis-config.xml
+
+#数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/storage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  application:
+    name: seata-action-storage #应用名
+
+# seata相关配置
+seata:
+  service:
+    grouplist:
+      default: 127.0.0.1:8091
+    vgroup-mapping:
+      service_tx_group: default
+      enable-degrade: false
+      disable-global-transaction: false
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: service_tx_group
+  client:
+    tm:
+      commit-retry-count: 3
+      rollback-retry-count: 3
+      enable-auto-data-source-proxy: false
+    rm:
+      report-success-enable: true
+      table-meta-check-enable: true
+      report-retry-count: 5
+      async-commit-buffer-limit: 1000
+  transport: # Netty相关配置start
+    type: TCP
+    server: NIO
+    heartbeat: true
+    serialization: seata
+    compressor: none
+    enable-client-batch-send-request: true #客户端事务消息请求是否批量合并发送(默认true)
+    shutdown:
+      wait: 3
+    thread-factory:
+      boss-thread-prefix: NettyBoss
+      worker-thread-prefix: NettyServerNIOWorker
+      server-executor-thread-prefix: NettyServerBizHandler
+      share-boss-worker: false
+      client-selector-thread-prefix: NettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: NettyClientWorkerThread

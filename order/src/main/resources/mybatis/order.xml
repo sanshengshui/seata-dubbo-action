@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mushuwei.order">
+
+    <!--创建订单-->
+    <insert id="createOrder" keyProperty="id" useGeneratedKeys="true"
+            parameterType="cn.mushuwei.order.entity.OrderDO">
+        insert into `order` (order_no,
+                           user_id,
+                           code,
+                           count,
+                           amount)
+        VALUES (#{order.orderNo},
+                #{order.userId},
+                #{order.code},
+                #{order.count},
+                #{order.amount})
+    </insert>
+
+    <select id="getById" resultType="cn.mushuwei.order.entity.OrderDO">
+        select * from `order` where id = #{id}
+    </select>
+
+</mapper>
