@@ -4,7 +4,6 @@ import cn.mushuwei.storage.api.StorageApi;
 import cn.mushuwei.storage.api.dto.CommodityDTO;
 import cn.mushuwei.storage.service.StorageService;
 import com.alibaba.fastjson.JSON;
-import io.seata.core.context.RootContext;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;

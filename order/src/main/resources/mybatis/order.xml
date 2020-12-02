@@ -4,7 +4,7 @@
 
     <insert id="tccCreateOrderPrepare" keyProperty="id" useGeneratedKeys="true"
             parameterType="cn.mushuwei.order.entity.OrderDO">
-        insert into `order` (order_no,
+        insert into `tcc_order` (order_no,
             user_id,
             code,
             count,
@@ -19,7 +19,7 @@
     </insert>
 
     <update id="tccCreateOrderCommitOrCancel">
-        update `order` set status = #{status}
+        update `tcc_order` set status = #{status}
         where order_no = #{orderNo}
     </update>
 

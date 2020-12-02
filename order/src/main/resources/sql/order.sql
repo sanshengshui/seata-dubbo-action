@@ -1,5 +1,5 @@
 #创建 订单表
-create table if not exists `order`.`order`
+create table if not exists `order`.`tcc_order`
 (
     id bigint auto_increment
         primary key,

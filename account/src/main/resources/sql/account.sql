@@ -1,5 +1,5 @@
 # 创建用户账户表
-create table if not exists account
+create table if not exists tcc_account
 (
 	id bigint auto_increment
 		primary key,
@@ -7,7 +7,7 @@ create table if not exists account
 	amount double(50,2) null comment '账号余额'
 );
 
-INSERT INTO account.account (id, user_id, amount) VALUES (1, 'user123', 1250);
+INSERT INTO account.tcc_account (id, user_id, amount) VALUES (1, 'user123', 1250);
 
 #创建undo_log表
 create table if not exists undo_log

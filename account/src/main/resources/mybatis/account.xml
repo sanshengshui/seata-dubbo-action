@@ -4,18 +4,18 @@
 
     <!--    以下是tcc模式所需的数据库操作 -->
     <update id="tccDecreaseAccountPrepare">
-        update account set amount = amount - #{amount},
+        update tcc_account set amount = amount - #{amount},
                            frozen_amount = frozen_amount + #{amount}
         where user_id = #{userId}
     </update>
 
     <update id="tccDecreaseAccountCommit">
-        update account set frozen_amount = frozen_amount - #{amount}
+        update tcc_account set frozen_amount = frozen_amount - #{amount}
         where user_id = #{userId}
     </update>
 
     <update id="tccDecreaseAccountCancel">
-        update account set amount = amount + #{amount},
+        update tcc_account set amount = amount + #{amount},
                            frozen_amount = frozen_amount - #{amount}
         where user_id = #{userId}
     </update>

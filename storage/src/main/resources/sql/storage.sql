@@ -1,5 +1,5 @@
 # 创建商品库存表
-create table if not exists storage.storage
+create table if not exists storage.tcc_storage
 (
 	id bigint auto_increment
 		primary key,
@@ -7,7 +7,7 @@ create table if not exists storage.storage
 	name varchar(255) null comment '商品名称',
 	count int null comment '商品库存数'
 );
-INSERT INTO storage.storage (id, commodity_code, name, count) VALUES (1, 'cola', '可口可乐', 2000);
+INSERT INTO storage.tcc_storage (id, commodity_code, name, count) VALUES (1, 'cola', '可口可乐', 2000);
 
 # 新建undo_log表
 create table if not exists storage.undo_log

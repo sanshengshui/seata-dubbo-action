@@ -3,18 +3,18 @@
 <mapper namespace="cn.mushuwei.storage.dao.StorageDao">
 
     <update id="tccDecreaseStoragePrepare">
-        update storage set count = count - #{count},
+        update tcc_storage set count = count - #{count},
                            frozen_count = frozen_count + #{count}
         where commodity_code = #{commodityCode}
     </update>
 
     <update id="tccDecreaseStorageCommit">
-        update storage set frozen_count = frozen_count - #{count}
+        update tcc_storage set frozen_count = frozen_count - #{count}
         where commodity_code = #{commodityCode}
     </update>
 
     <update id="tccDecreaseStorageCancel">
-        update storage set count = count + #{count},
+        update tcc_storage set count = count + #{count},
                            frozen_count = frozen_count - #{count}
         where commodity_code = #{commodityCode}
     </update>
