@@ -36,7 +36,6 @@ public class BusinessServiceImpl implements BusinessService {
         CommodityDTO commodityDTO = new CommodityDTO();
         commodityDTO.setCommodityCode(businessDTO.getCommodityCode());
         commodityDTO.setCount(businessDTO.getCount());
-        commodityDTO.setName(businessDTO.getName());
         boolean storageResult =  storageApi.decreaseStorage(commodityDTO);
 
         OrderDTO orderDTO = new OrderDTO();
