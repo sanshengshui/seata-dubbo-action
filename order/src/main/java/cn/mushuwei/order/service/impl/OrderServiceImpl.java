@@ -24,34 +24,46 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService {
 
     @Resource(name = "orderDao")
-    private OrderDao orderDao;
-    @DubboReference
-    private AccountApi accountApi;
+    private OrderDao orderDAO;
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean createOrder(OrderDTO orderDTO) {
-        OrderDO order = null;
+    public OrderDTO createOrderPrepare(OrderDTO orderDTO) {
+        //TODO 传递问题
+        //orderDTO.setOrderNo(UUID.randomUUID().toString().replace("-",""));
+        OrderDO order = PojoUtils.copyProperties(orderDTO, OrderDO.class);
+        order.setCount(orderDTO.getOrderCount());
+        order.setAmount(orderDTO.getOrderAmount().doubleValue());
+        order.setCode(orderDTO.getCommodityCode());
+        order.setStatus(1);
         try {
-            orderDTO.setOrderNo(UUID.randomUUID().toString().replace("-",""));
-            order = PojoUtils.copyProperties(orderDTO, OrderDO.class);
-            order.setCount(orderDTO.getOrderCount());
-            order.setAmount(orderDTO.getOrderAmount().doubleValue());
-            order.setCode(orderDTO.getCommodityCode());
-            //创建订单
-            orderDao.createOrder(order);
-
-            AccountDTO accountDTO = new AccountDTO();
-            accountDTO.setUserId(orderDTO.getUserId());
-            accountDTO.setAmount(orderDTO.getOrderAmount());
-            //扣减账户余额
-            boolean result = accountApi.decreaseAccount(accountDTO);
-            if (result) {
-                return true;
-            }
-            return false;
+            orderDAO.tccCreateOrderPrepare(order);
         } catch (Exception e) {
             log.info("创建订单失败: {}", order, e);
+        }
+        orderDTO.setOrderNo(orderDTO.getOrderNo());
+
+        return orderDTO;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean createOrderCommit(OrderDTO orderDTO) {
+        int order = orderDAO.tccCreateOrderCommitOrCancel(2, orderDTO.getOrderNo());
+        if (order > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean createOrderCancel(OrderDTO orderDTO) {
+        log.info("orderDTO: {}", orderDTO);
+        int order = orderDAO.tccCreateOrderCommitOrCancel(3, orderDTO.getOrderNo());
+        if (order > 0) {
+            return true;
         }
         return false;
     }

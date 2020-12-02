@@ -9,10 +9,26 @@ import cn.mushuwei.order.api.dto.OrderDTO;
 public interface OrderService {
 
     /**
-     * 创建订单
+     * 创建订单准备
      *
-     * @param orderDTO - 订单信息
+     * @param orderDTO
      * @return
      */
-    Boolean createOrder(OrderDTO orderDTO);
+    OrderDTO createOrderPrepare(OrderDTO orderDTO);
+
+    /**
+     * 创建订单准备
+     *
+     * @param orderDTO
+     * @return
+     */
+    Boolean createOrderCommit(OrderDTO orderDTO);
+
+    /**
+     * 创建订单准备
+     *
+     * @param orderDTO
+     * @return
+     */
+    Boolean createOrderCancel(OrderDTO orderDTO);
 }

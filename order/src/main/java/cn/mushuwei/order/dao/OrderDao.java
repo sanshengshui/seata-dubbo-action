@@ -11,7 +11,16 @@ import org.springframework.stereotype.Repository;
 @Repository("orderDao")
 public interface OrderDao {
 
-    void createOrder(@Param("order") OrderDO orderDO);
+    /**
+     * 创建订单准备
+     *
+     * @param orderDO
+     */
+    void tccCreateOrderPrepare(@Param("order") OrderDO orderDO);
 
-    OrderDO getById(Integer id);
+    /**
+     * 创建订单提交/取消
+     *
+     */
+    int tccCreateOrderCommitOrCancel(@Param("status") Integer status, @Param("orderNo") String orderNo);
 }

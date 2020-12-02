@@ -2,8 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.mushuwei.account.dao.AccountDao">
 
-    <update id="decreaseAccount">
-        update account set amount = amount-#{amount} where user_id = #{userId}
+    <!--    以下是tcc模式所需的数据库操作 -->
+    <update id="tccDecreaseAccountPrepare">
+        update account set amount = amount - #{amount},
+                           frozen_amount = frozen_amount + #{amount}
+        where user_id = #{userId}
+    </update>
+
+    <update id="tccDecreaseAccountCommit">
+        update account set frozen_amount = frozen_amount - #{amount}
+        where user_id = #{userId}
+    </update>
+
+    <update id="tccDecreaseAccountCancel">
+        update account set amount = amount + #{amount},
+                           frozen_amount = frozen_amount - #{amount}
+        where user_id = #{userId}
     </update>
 
 </mapper>

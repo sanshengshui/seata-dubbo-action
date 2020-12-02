@@ -25,4 +25,9 @@ public class StorageDO implements Serializable {
      * 商品库存数
      */
     private Integer count;
+
+    /**
+     * 冻结数量
+     */
+    private Integer frozenCount;
 }

@@ -20,8 +20,28 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean decreaseStorage(CommodityDTO commodityDTO) {
-        int storage = storageDao.decreaseStorage(commodityDTO.getCommodityCode(), commodityDTO.getCount());
+    public Boolean decreaseStoragePrepare(CommodityDTO commodityDTO) {
+        int storage = storageDao.tccDecreaseStoragePrepare(commodityDTO.getCommodityCode(), commodityDTO.getCount());
+        if (storage > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean decreaseStorageCommit(CommodityDTO commodityDTO) {
+        int storage = storageDao.tccDecreaseStorageCommit(commodityDTO.getCommodityCode(), commodityDTO.getCount());
+        if (storage > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean decreaseStorageCancel(CommodityDTO commodityDTO) {
+        int storage = storageDao.tccDecreaseStorageCancel(commodityDTO.getCommodityCode(), commodityDTO.getCount());
         if (storage > 0) {
             return true;
         }

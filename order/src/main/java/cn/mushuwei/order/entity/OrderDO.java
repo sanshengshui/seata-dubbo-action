@@ -38,4 +38,9 @@ public class OrderDO implements Serializable {
      * 消费总金额
      */
     private Double amount;
+
+    /**
+     * 状态，1-预创建；2-创建成功；3-创建失败
+     */
+    private Integer status;
 }

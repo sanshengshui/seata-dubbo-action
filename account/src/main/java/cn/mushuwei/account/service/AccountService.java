@@ -9,9 +9,27 @@ import cn.mushuwei.account.api.dto.AccountDTO;
 public interface AccountService {
 
     /**
-     * 扣用户钱
+     * 扣用户钱准备
+     *
      * @param accountDTO
      * @return
      */
-    Boolean decreaseAccount(AccountDTO accountDTO);
+    Boolean decreaseAccountPrepare(AccountDTO accountDTO);
+
+    /**
+     * 扣用户钱提交
+     *
+     * @param accountDTO
+     * @return
+     */
+    Boolean decreaseAccountCommit(AccountDTO accountDTO);
+
+
+    /**
+     * 扣用户钱回滚
+     *
+     * @param accountDTO
+     * @return
+     */
+    Boolean decreaseAccountCancel(AccountDTO accountDTO);
 }

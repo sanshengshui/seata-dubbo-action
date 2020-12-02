@@ -11,11 +11,29 @@ import org.springframework.stereotype.Repository;
 public interface AccountDao {
 
     /**
-     * 扣减账号余额
+     * 扣减账号准备
      *
      * @param userId 用户编号
      * @param amount 钱数量
      * @return
      */
-    int decreaseAccount(@Param("userId") String userId, @Param("amount") Double amount);
+    int tccDecreaseAccountPrepare(@Param("userId") String userId, @Param("amount") Double amount);
+
+    /**
+     * 扣减账号提交
+     *
+     * @param userId 用户编号
+     * @param amount 钱数量
+     * @return
+     */
+    int tccDecreaseAccountCommit(@Param("userId") String userId, @Param("amount") Double amount);
+
+    /**
+     * 扣减账号回滚
+     *
+     * @param userId 用户编号
+     * @param amount 钱数量
+     * @return
+     */
+    int tccDecreaseAccountCancel(@Param("userId") String userId, @Param("amount") Double amount);
 }

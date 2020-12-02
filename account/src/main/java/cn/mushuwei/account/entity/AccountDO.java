@@ -23,4 +23,9 @@ public class AccountDO implements Serializable {
      * 账号余额
      */
     private Double amount;
+
+    /**
+     * 冻结数量
+     */
+    private Double frozenAmount;
 }

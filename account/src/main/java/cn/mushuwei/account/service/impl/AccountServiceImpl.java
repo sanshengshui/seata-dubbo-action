@@ -23,8 +23,28 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean decreaseAccount(AccountDTO accountDTO) {
-        int account = accountDao.decreaseAccount(accountDTO.getUserId(), accountDTO.getAmount().doubleValue());
+    public Boolean decreaseAccountPrepare(AccountDTO accountDTO) {
+        int account = accountDao.tccDecreaseAccountPrepare(accountDTO.getUserId(), accountDTO.getAmount().doubleValue());
+        if (account > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean decreaseAccountCommit(AccountDTO accountDTO) {
+        int account = accountDao.tccDecreaseAccountCommit(accountDTO.getUserId(), accountDTO.getAmount().doubleValue());
+        if (account > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean decreaseAccountCancel(AccountDTO accountDTO) {
+        int account = accountDao.tccDecreaseAccountCancel(accountDTO.getUserId(), accountDTO.getAmount().doubleValue());
         if (account > 0) {
             return true;
         }

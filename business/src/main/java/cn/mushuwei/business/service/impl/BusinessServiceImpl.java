@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 /**
  * @author jamesmsw
  * @date 2020/12/1 9:37 下午
@@ -36,14 +38,15 @@ public class BusinessServiceImpl implements BusinessService {
         CommodityDTO commodityDTO = new CommodityDTO();
         commodityDTO.setCommodityCode(businessDTO.getCommodityCode());
         commodityDTO.setCount(businessDTO.getCount());
-        boolean storageResult =  storageApi.decreaseStorage(commodityDTO);
+        boolean storageResult =  storageApi.decreaseStoragePrepare(null, commodityDTO);
 
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setUserId(businessDTO.getUserId());
         orderDTO.setCommodityCode(businessDTO.getCommodityCode());
         orderDTO.setOrderCount(businessDTO.getCount());
         orderDTO.setOrderAmount(businessDTO.getAmount());
-        boolean orderResult = orderApi.createOrder(orderDTO);
+        orderDTO.setOrderNo(UUID.randomUUID().toString().replace("-",""));
+        boolean orderResult = orderApi.createOrderPrepare(null, orderDTO);
 
         //打开注释测试事务发生异常后，全局回滚功能
 //        if (!flag) {
