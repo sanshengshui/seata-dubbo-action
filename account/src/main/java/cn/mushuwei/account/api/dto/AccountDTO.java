@@ -15,7 +15,13 @@ public class AccountDTO implements Serializable {
 
     private Integer id;
 
+    /**
+     * 用户编号
+     */
     private String userId;
 
+    /**
+     * 账号余额
+     */
     private BigDecimal amount;
 }

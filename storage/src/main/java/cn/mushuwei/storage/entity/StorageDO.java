@@ -13,7 +13,16 @@ public class StorageDO implements Serializable {
     private static final long serialVersionUID = -5615156057126774764L;
 
     private Integer id;
+    /**
+     * 商品编码
+     */
     private String commodityCode;
+    /**
+     * 商品名称
+     */
     private String name;
+    /**
+     * 商品库存数
+     */
     private Integer count;
 }

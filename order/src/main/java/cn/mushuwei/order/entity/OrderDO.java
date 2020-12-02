@@ -14,13 +14,28 @@ public class OrderDO implements Serializable {
 
     private Integer id;
 
+    /**
+     * 订单号
+     */
     private String orderNo;
 
+    /**
+     * 用户编号
+     */
     private String userId;
 
+    /**
+     * 商品编码
+     */
     private String code;
 
+    /**
+     * 商品数量
+     */
     private Integer count;
 
+    /**
+     * 消费总金额
+     */
     private Double amount;
 }
