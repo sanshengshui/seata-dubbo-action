@@ -4,7 +4,8 @@ create table if not exists tcc_account
 	id bigint auto_increment
 		primary key,
 	user_id varchar(50) null comment '用户编号',
-	amount double(50,2) null comment '账号余额'
+	amount double(50,2) null comment '账号余额',
+	frozen_amount double(50,2) default 0.00 null comment '账号冻结余额'
 );
 
 INSERT INTO account.tcc_account (id, user_id, amount) VALUES (1, 'user123', 1250);

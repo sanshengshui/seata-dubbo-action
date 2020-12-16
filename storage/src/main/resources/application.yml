@@ -13,10 +13,6 @@ dubbo:
 server:
   port: 8081
 
-# MyBatis 自定义的mapper配置
-mybatis:
-  mapper-locations: classpath:mybatis/*.xml
-  config-location: classpath:mybatis-config.xml
 
 #数据源配置
 spring:

@@ -1,5 +1,5 @@
 #创建 订单表
-create table if not exists `order`.`tcc_order`
+create table if not exists `order`.tcc_order
 (
     id bigint auto_increment
         primary key,
@@ -7,7 +7,8 @@ create table if not exists `order`.`tcc_order`
     user_id varchar(50) null comment '用户编号',
     code varchar(100) null comment '商品编码',
     count int null comment '商品数量',
-    amount double(50,2) null comment '消费总金额'
+    amount double(50,2) null comment '消费总金额',
+    status tinyint null comment '状态，1-预创建；2-创建成功；3-创建失败'
 );
 
 
