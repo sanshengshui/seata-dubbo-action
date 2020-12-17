@@ -1,0 +1,12 @@
+# 商场下单
+POST localhost:8084/business/buy
+Content-Type: application/json
+
+{
+    "userId" : "user123",
+    "commodityCode" : "cola",
+    "count" : 2,
+    "amount" : 5.0
+}
+
+
