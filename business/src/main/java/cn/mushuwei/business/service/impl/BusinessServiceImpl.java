@@ -31,7 +31,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     @GlobalTransactional(timeoutMills = 300000, name = "seata-demo-business")
     public Boolean handleBusiness(BusinessDTO businessDTO) {
-        flag = true;
+        flag = false;
         log.info("开始全局事务，XID = " + RootContext.getXID());
         CommodityDTO commodityDTO = new CommodityDTO();
         commodityDTO.setCommodityCode(businessDTO.getCommodityCode());
@@ -46,9 +46,9 @@ public class BusinessServiceImpl implements BusinessService {
         boolean orderResult = orderApi.createOrder(orderDTO);
 
         //打开注释测试事务发生异常后，全局回滚功能
-//        if (!flag) {
-//            throw new RuntimeException("测试抛异常后，分布式事务回滚！");
-//        }
+        if (!flag) {
+            throw new RuntimeException("测试抛异常后，分布式事务回滚！");
+        }
 
         if (!storageResult || !orderResult) {
             throw new RuntimeException("失败");
